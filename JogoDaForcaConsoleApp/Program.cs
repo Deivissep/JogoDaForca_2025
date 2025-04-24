@@ -4,6 +4,45 @@
     {
         static void Main(string[] args)
         {
+            string[] animais = [
+            "camaleão",
+            "camelo",
+            "canário",
+            "canguru",
+            "caracol",
+            "caramujo",
+            "vaca",
+            "vaga-lume",
+            "veado",
+            "urso-branco",
+            "urso-pardo",
+            "urso-panda",
+            "tarântula",
+            "tartaruga",
+            "sapo",
+            "sardinha",
+            "serpente",
+            "polvo",
+            "pombo",
+            "pônei",
+            "porco",
+            "cobra",
+            "codorna",
+            "coelho",
+            "coiote",
+            "calopsita",
+            "camarão",
+            "camaleão",
+            "camelo",
+            "baiacu",
+            "baleia",
+            "barata",
+            "bem-te-vi",
+            "besouro",
+            "bezerro",
+            "bicho-da-seda",
+            "bicho-pau"];
+
             string[] frutas = [
             "ABACAXI",
             "ACEROLA",
@@ -61,12 +100,29 @@
                         continue;
                     }
 
+                    Console.Clear();
+                    Console.WriteLine("------------------------");
+                    Console.WriteLine("Jogo da Forca");
+                    Console.WriteLine("------------------------");
+                    Console.WriteLine("1 - Animais");
+                    Console.WriteLine("2 - Frutas");
+                    Console.Write("Escolha uma opção: ");
+                    string tema = Console.ReadLine();
+                    string[] bancoDePalavras = null;
+
+                    if (tema == "1")
+                    {
+                        bancoDePalavras = animais;
+                    }
+                    else if (tema == "2")
+                    {
+                        bancoDePalavras = frutas;
+                    }
 
                     Random geradorDeNumero = new Random();
+                    int indicePalavraEscolhida = geradorDeNumero.Next(bancoDePalavras.Length);
+                    string palavraSecreta = bancoDePalavras[indicePalavraEscolhida].ToUpper();
 
-                    int indicePalavraEscolhida = geradorDeNumero.Next(frutas.Length);
-
-                    string palavraSecreta = frutas[indicePalavraEscolhida];
 
                     char[] letrasEncontradas = new char[palavraSecreta.Length];
 
@@ -188,8 +244,15 @@
 
                         Console.Write("Digite uma Letra: ");
                         char chute = char.ToUpper(Console.ReadLine()[0]);
-                        letrasChutadas.Add(chute);
 
+                        if (letrasChutadas.Contains(chute))
+                        {
+                            Console.WriteLine("Você já tentou esta letra antes!");
+                            Console.WriteLine("Pressione qualquer tecla para tentar outra letra...");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        letrasChutadas.Add(chute);
 
                         bool letraFoiEncontrada = false;
 
